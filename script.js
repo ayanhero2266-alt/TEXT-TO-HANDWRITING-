@@ -30,7 +30,15 @@ function convertText() {
                                                             pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
                                                                 pdf.save("handwriting.pdf");
                                                                   });
-                                                                  }
+                                                                  }// EXISTING convertText() ke andar add / update karo
+                                                                  let size = parseInt(document.getElementById("fontSize").value);
+
+                                                                  output.style.fontSize = size + "px";
+
+                                                                  // 🔴 YEH 2 LINE IMPORTANT HAIN
+                                                                  output.style.lineHeight = (size + 8) + "px";
+                                                                  document.getElementById("paper").style.backgroundSize =
+                                                                    "100% " + (size + 8) + "px";
 }
   
 

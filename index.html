@@ -5,14 +5,9 @@
   <title>Text to Handwriting</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- Handwriting Font -->
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
-  <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
@@ -22,6 +17,18 @@
   <textarea id="inputText" placeholder="Yahan apna text likho..."></textarea>
 
   <br>
+
+  <!-- FONT SIZE SELECT -->
+  <label><b>Font Size:</b></label>
+  <select id="fontSize" onchange="convertText()">
+    <option value="18">Small</option>
+    <option value="22" selected>Medium</option>
+    <option value="26">Large</option>
+    <option value="30">Extra Large</option>
+  </select>
+
+  <br><br>
+
   <button onclick="convertText()">Convert</button>
   <button onclick="downloadImage()">Download Image</button>
   <button onclick="downloadPDF()">Download PDF</button>
@@ -34,4 +41,33 @@
 </body>
 </html>
 
-<H1>WEBSITE BY AYAN 
+
+ 
+  
+ 
+
+  
+  
+
+ 
+ 
+
+  
+ 
+
+
+  
+
+  
+
+  
+  
+  
+  
+
+  
+ 
+
+ 
+
+

@@ -1,35 +1,68 @@
-<button onclick="location.href='add-student.html'">Add Student</button>
-// Add Student Function
-function addStudent() {
+const paper = document.getElementById("paper");
+const output = document.getElementById("outputText");
 
-    let student = {
-        name: document.getElementById("name").value,
-        roll: document.getElementById("roll").value,
-        class: document.getElementById("class").value,
-        section: document.getElementById("section").value,
-        adm: document.getElementById("adm").value,
-        contact: document.getElementById("contact").value
-    };
+function convertText() {
+  const text = document.getElementById("inputText").value;
+  const size = parseInt(document.getElementById("fontSize").value);
+  const font = document.getElementById("fontStyle").value;
 
-    let face = document.getElementById("face").files[0];
+  output.innerText = text;
 
-    if (!student.name || !student.roll || !student.adm || !face) {
-        alert("Please fill all fields and upload face image.");
-        return;
-    }
+  // Apply font
+  output.style.fontFamily = font;
 
-    // Save student object
-    localStorage.setItem(student.adm, JSON.stringify(student));
+  // Apply size
+  output.style.fontSize = size + "px";
 
-    // Save face image file name
-    localStorage.setItem(student.adm + "_face", face.name);
+  // Line height for proper notebook look
+  const lineHeight = size + 8;
+  output.style.lineHeight = lineHeight + "px";
 
-    // Success message
-    document.getElementById("msg").style.display = "block";
+  // Sync notebook lines
+  paper.style.backgroundSize = "100% " + lineHeight + "px";
+}
 
-    setTimeout(() => {
-        document.getElementById("msg").style.display = "none";
-    }, 2000);
+// IMAGE DOWNLOAD
+function downloadImage() {
+  html2canvas(paper).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "handwriting.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
 
-    // Clear fields
-    document.getElementById("name").value = "";
+// PDF DOWNLOAD
+function downloadPDF() {
+  html2canvas(paper).then(canvas => {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const imgData = canvas.toDataURL("image/png");
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    pdf.save("handwriting.pdf");
+  });
+}
+function convertText() {
+  const text = document.getElementById("inputText").value;
+  const size = parseInt(document.getElementById("fontSize").value);
+  const font = document.getElementById("fontStyle").value;
+
+  const output = document.getElementById("outputText");
+  const paper = document.getElementById("paper");
+
+  output.textContent = text;
+
+  // 🔥 FORCE FONT APPLY
+  output.style.setProperty("font-family", font, "important");
+
+  output.style.fontSize = size + "px";
+
+  const lineHeight = size + 8;
+  output.style.lineHeight = lineHeight + "px";
+
+  paper.style.backgroundSize = "100% " + lineHeight + "px";
+}

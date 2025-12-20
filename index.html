@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text to Handwriting</title>
+
+  <!-- Google Fonts (English + Hindi) -->
+  <link href="https://fonts.googleapis.com/css2?
+  family=Patrick+Hand&
+  family=Indie+Flower&
+  family=Shadows+Into+Light&
+  family=Hind&
+  family=Kalam&
+  family=Noto+Sans+Devanagari&
+  display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <h1>Text to Handwriting (English + Hindi)</h1>
+
+  <textarea id="inputText" placeholder="यहाँ हिंदी या English text लिखो..."></textarea>
+
+  <br><br>
+
+  <!-- FONT SELECT -->
+  <label><b>Font:</b></label>
+  <select id="fontStyle" onchange="convertText()">
+    <option value="'Patrick Hand', cursive">Patrick Hand (English)</option>
+    <option value="'Indie Flower', cursive">Indie Flower (English)</option>
+    <option value="'Shadows Into Light', cursive">Shadows Into Light (English)</option>
+
+    <option value="'Kalam', cursive">Kalam (Hindi Handwriting)</option>
+    <option value="'Hind', sans-serif">Hind (Hindi)</option>
+    <option value="'Noto Sans Devanagari', sans-serif">
+      Noto Sans Devanagari (Hindi)
+    </option>
+  </select>
+
+  <!-- FONT SIZE -->
+  <label><b>Font Size:</b></label>
+  <select id="fontSize" onchange="convertText()">
+    <option value="20">Small</option>
+    <option value="24" selected>Medium</option>
+    <option value="28">Large</option>
+    <option value="32">Extra Large</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="convertText()">Convert</button>
+  <button onclick="downloadImage()">Download Image</button>
+  <button onclick="downloadPDF()">Download PDF</button>
+
+  <div id="paper">
+    <p id="outputText"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

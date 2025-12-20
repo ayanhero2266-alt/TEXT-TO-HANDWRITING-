@@ -1,63 +1,35 @@
-function convertText() {
-      let text = document.getElementById("inputText").value;
-        let size = document.getElementById("fontSize").value;
+<button onclick="location.href='add-student.html'">Add Student</button>
+// Add Student Function
+function addStudent() {
 
-          let output = document.getElementById("outputText");
-            output.innerText = text;
-              output.style.fontSize = size + "px";
-              }
+    let student = {
+        name: document.getElementById("name").value,
+        roll: document.getElementById("roll").value,
+        class: document.getElementById("class").value,
+        section: document.getElementById("section").value,
+        adm: document.getElementById("adm").value,
+        contact: document.getElementById("contact").value
+    };
 
-              // IMAGE DOWNLOAD
-              function downloadImage() {
-                html2canvas(document.getElementById("paper")).then(canvas => {
-                    let link = document.createElement("a");
-                        link.download = "handwriting.png";
-                            link.href = canvas.toDataURL();
-                                link.click();
-                                  });
-                                  }
+    let face = document.getElementById("face").files[0];
 
-                                  // PDF DOWNLOAD
-                                  function downloadPDF() {
-                                    html2canvas(document.getElementById("paper")).then(canvas => {
-                                        const { jsPDF } = window.jspdf;
-                                            let pdf = new jsPDF("p", "mm", "a4");
+    if (!student.name || !student.roll || !student.adm || !face) {
+        alert("Please fill all fields and upload face image.");
+        return;
+    }
 
-                                                let imgData = canvas.toDataURL("image/png");
-                                                    let imgWidth = 210;
-                                                        let imgHeight = (canvas.height * imgWidth) / canvas.width;
+    // Save student object
+    localStorage.setItem(student.adm, JSON.stringify(student));
 
-                                                            pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-                                                                pdf.save("handwriting.pdf");
-                                                                  });
-                                                                  }// EXISTING convertText() ke andar add / update karo
-                                                                  let size = parseInt(document.getElementById("fontSize").value);
+    // Save face image file name
+    localStorage.setItem(student.adm + "_face", face.name);
 
-                                                                  output.style.fontSize = size + "px";
+    // Success message
+    document.getElementById("msg").style.display = "block";
 
-                                                                  // 🔴 YEH 2 LINE IMPORTANT HAIN
-                                                                  output.style.lineHeight = (size + 8) + "px";
-                                                                  document.getElementById("paper").style.backgroundSize =
-                                                                    "100% " + (size + 8) + "px";
-}
-  
+    setTimeout(() => {
+        document.getElementById("msg").style.display = "none";
+    }, 2000);
 
-
-
-  
- 
-   
- 
-  
-
-
-
-  
-  
-
-   
-
-   
-    
-
-
+    // Clear fields
+    document.getElementById("name").value = "";
